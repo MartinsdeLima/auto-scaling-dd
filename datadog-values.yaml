@@ -1,0 +1,38 @@
+datadog:
+  apiKey: a77c4759f11fb82ae9fe4b9d31b0e85b
+  appKey: d423f2ab5c7c7750b9d524e1354fc33a5bc522e6
+  site: us5.datadoghq.com
+
+  # Necessário para Minikube (TLS do kubelet não verificado)
+  kubelet:
+    tlsVerify: false
+
+  # Habilitar APM/Traces
+  apm:
+    enabled: true
+    
+  # Logs
+  logs:
+    enabled: true
+    containerCollectAll: true
+
+# Agent DaemonSet
+agents:
+  enabled: true
+  rbac:
+    create: true
+    serviceAccountName: datadog-agent
+
+# Cluster Agent (importante para métricas!)
+clusterAgent:
+  enabled: true
+  rbac:
+    create: true
+    serviceAccountName: datadog-cluster-agent
+  
+  # Metrics Provider (necessário para HPA)
+  metricsProvider:
+    enabled: true
+    service:
+      type: ClusterIP
+      port: 8443
