@@ -1,15 +1,11 @@
 FROM php:8.3-cli
 
-# Criar usuário não-root
-RUN useradd -m -u 1000 phpuser
+RUN docker-php-ext-install sockets
 
-# Copiar aplicação
-COPY --chown=phpuser:phpuser index.php /var/www/html/index.php
+WORKDIR /var/www/html
 
-# Definir permissões
-RUN chmod 755 /var/www/html && chmod 644 /var/www/html/index.php
+COPY index.php .
 
-# Switch para usuário não-root
-USER phpuser
+EXPOSE 8089
 
-CMD ["php", "-S", "0.0.0.0:8089", "-t", "/var/www/html"]
+CMD ["php", "-S", "0.0.0.0:8089", "index.php"]

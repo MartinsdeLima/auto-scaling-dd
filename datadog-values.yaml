@@ -33,6 +33,7 @@ clusterAgent:
   # Metrics Provider (necessário para HPA)
   metricsProvider:
     enabled: true
+    useDatadogMetrics: true
     service:
       type: ClusterIP
       port: 8443
