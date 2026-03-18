@@ -12,14 +12,16 @@ spec:
     metadata:
       labels:
         app: app-php
+        admission.datadoghq.com/enabled: "true"
       annotations:
             ad.datadoghq.com/app-php.check_names: '["http"]'
             ad.datadoghq.com/app-php.init_configs: '[{}]'
             ad.datadoghq.com/app-php.instances: '[{"name":"app-php","url":"http://%%host%%:8089/ping"}]' 
+            admission.datadoghq.com/php-lib.version: "latest"
     spec:
       containers:
         - name: app-php
-          image: martinslima/app-php:latest
+          image: martinslima/app-php:v2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8089

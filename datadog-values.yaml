@@ -29,7 +29,9 @@ clusterAgent:
   rbac:
     create: true
     serviceAccountName: datadog-cluster-agent
-  
+  admissionController:
+    enabled: true
+    mutateUnlabelled: false  
   # Metrics Provider (necessário para HPA)
   metricsProvider:
     enabled: true

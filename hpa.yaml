@@ -14,7 +14,7 @@ spec:
   - type: External
     external:
       metric:
-        name: app-php-latency
+        name: datadogmetric@app-php:app-php-latency
       target:
         type: AverageValue
-        averageValue: "100m"
+        averageValue: "400"
