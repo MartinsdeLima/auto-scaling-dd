@@ -62,7 +62,10 @@ deve estar --> dogstatsd_non_local_traffic: true
 ```bash
 kubectl exec -it <agent-pod> -n datadog -- agent diagnose
 ```
-
+#### Log do Agnt em tempo real
+```bash
+kubectl logs -n datadog ds/datadog -c agent -f
+```
 #### Para rodar em loop a aplicação para testes
 ```bash
 for i in {1..50}; do curl -s http://localhost:30080/ > /dev/null; done
