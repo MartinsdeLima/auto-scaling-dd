@@ -6,6 +6,12 @@ A imagem é definida no arquivo `Dockerfile`, usando `php:8.3-cli` com a bibliot
 
 ## Passo a Passo Resumido da Solução
 
+##### A instalação e configuração dos componentes do Datadog, foram feitas baseadas na documentação oficial em: **https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/**
+
+##### Documentação completa sobre autoscaling Datadog.
+**https://docs.datadoghq.com/containers/autoscaling/?tab=datadogoperator**
+
+
 1. Suba a aplicação PHP de teste com os arquivos `Dockerfile`, `index.php` e `deployment.yaml`.
 2. Instale ou atualize o Datadog no namespace `datadog` com Helm, usando o arquivo `datadog-values.yaml` para habilitar Agent, Cluster Agent e External Metrics Provider:
 
