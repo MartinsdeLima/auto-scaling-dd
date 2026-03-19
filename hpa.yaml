@@ -10,6 +10,13 @@ spec:
     name: app-php
   minReplicas: 1
   maxReplicas: 5
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 3
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
   metrics:
   - type: External
     external:
@@ -17,4 +24,4 @@ spec:
         name: datadogmetric@app-php:app-php-latency
       target:
         type: AverageValue
-        averageValue: "400"
+        averageValue: "250M"

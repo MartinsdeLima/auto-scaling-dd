@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: app-php
-          image: martinslima/app-php:v2
+          image: martinslima/app-php:v4
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8089
@@ -34,11 +34,18 @@ spec:
               cpu: "200m"
           env:
             - name: DD_AGENT_HOST
+#              value: datadog.datadog.svc.cluster.local
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
             - name: DD_TRACE_AGENT_PORT
               value: "8126"
+            - name: DD_TRACE_ENABLED
+              value: "true"
+            - name: DD_APPSEC_ENABLED
+              value: "false"
+            - name: DD_ENV
+              value: "dev"
             - name: DD_SERVICE
               value: "app-php"
             - name: DD_VERSION

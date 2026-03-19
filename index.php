@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', '0');
+error_reporting(E_ERROR);
+
 header('Content-Type: text/plain; charset=utf-8');
 
 $start = microtime(true);
@@ -46,11 +49,17 @@ if ($uri === '/ping') {
 
 }
 
+$statusCode = http_response_code();
+dogstatsd("php.request.by_status", 1, "c", ["endpoint:$uri", "status:$statusCode"]);
+if ($statusCode >= 500) {
+    dogstatsd("php.request.error", 1, "c", ["endpoint:$uri", "status:$statusCode"]);
+}
+
 $duration = (microtime(true) - $start) * 1000;
 
 dogstatsd(
     "php.request.duration",
     $duration,
-    "g",
+    "h",
     ["endpoint:$uri"]
 );

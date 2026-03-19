@@ -4,4 +4,5 @@ metadata:
   name: app-php-latency
   namespace: app-php
 spec:
-  query: avg:container.cpu.limit{service:app-php}
+##  query: avg:container.cpu.limit{service:app-php}
+  query: avg:trace.web.request.hits.by_http_status{service:app-php}.as_count()
