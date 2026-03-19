@@ -18,7 +18,7 @@ function dogstatsd($metric, $value, $type="c", $tags=[]) {
         $tagstr = "|#" . implode(",", $tags);
     }
 
-    $msg = "$metric:$value|$type$tagstr";
+    $msg = "$metric:$value|$type$tagstr\n";
 
     $fp = fsockopen("udp://$agent", $port);
     if ($fp) {
@@ -30,7 +30,7 @@ function dogstatsd($metric, $value, $type="c", $tags=[]) {
 $uri = $_SERVER['REQUEST_URI'] ?? '/';
 $uri = parse_url($uri, PHP_URL_PATH);
 
-dogstatsd("php.request.count", 1, "c", ["endpoint:$uri"]);
+dogstatsd("php.request.count", 1, "c", ["endpoint:$uri", "service:app-php"]);
 
 if ($uri === '/ping') {
 
@@ -50,9 +50,9 @@ if ($uri === '/ping') {
 }
 
 $statusCode = http_response_code();
-dogstatsd("php.request.by_status", 1, "c", ["endpoint:$uri", "status:$statusCode"]);
+dogstatsd("php.request.by_status", 1, "c", ["endpoint:$uri", "status:$statusCode", "service:app-php"]);
 if ($statusCode >= 500) {
-    dogstatsd("php.request.error", 1, "c", ["endpoint:$uri", "status:$statusCode"]);
+    dogstatsd("php.request.error", 1, "c", ["endpoint:$uri", "status:$statusCode", "service:app-php"]);
 }
 
 $duration = (microtime(true) - $start) * 1000;
@@ -61,5 +61,5 @@ dogstatsd(
     "php.request.duration",
     $duration,
     "h",
-    ["endpoint:$uri"]
+    ["endpoint:$uri", "service:app-php"]
 );
