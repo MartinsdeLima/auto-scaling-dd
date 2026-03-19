@@ -11,17 +11,23 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 3
+    scaleUp:
+      stabilizationWindowSeconds: 0
       policies:
         - type: Percent
           value: 100
+          periodSeconds: 15
+    scaleDown:
+      stabilizationWindowSeconds: 30
+      policies:
+        - type: Percent
+          value: 50
           periodSeconds: 15
   metrics:
   - type: External
     external:
       metric:
-        name: datadogmetric@app-php:app-php-latency
+        name: datadogmetric@app-php:app-php-scaling
       target:
-        type: AverageValue
-        averageValue: "100"
+        type: Value
+        value: "100"
