@@ -5,4 +5,4 @@ metadata:
   namespace: app-php
 spec:
 ##  query: avg:container.cpu.limit{service:app-php}
-  query: avg:trace.web.request.hits.by_http_status{service:app-php}.as_count()
+  query: sum:php.request.count{service:app-php}.as_count()

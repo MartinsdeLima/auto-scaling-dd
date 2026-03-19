@@ -24,4 +24,4 @@ spec:
         name: datadogmetric@app-php:app-php-latency
       target:
         type: AverageValue
-        averageValue: "250M"
+        averageValue: "100"
