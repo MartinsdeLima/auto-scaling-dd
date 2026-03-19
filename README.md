@@ -2,6 +2,13 @@
 
 ## Comando úteis
 
+#### Configurar as chaves do Datadog com Secret
+```bash
+kubectl apply -f datadog-secret.yaml
+```
+
+Se o chart Datadog estiver instalado no namespace `datadog`, o arquivo `datadog-values.yaml` já está preparado para buscar o secret `datadog-secret`.
+
 ##### Para verificar o status do HPA, execute o comando:
 ```bash
 kubectl describe hpa -n app-php
@@ -70,4 +77,3 @@ kubectl logs -n datadog ds/datadog -c agent -f
 ```bash
 for i in {1..50}; do curl -s http://localhost:30080/ > /dev/null; done
 ```
-

@@ -1,6 +1,7 @@
 datadog:
-  apiKey: a77c4759f11fb82ae9fe4b9d31b0e85b
-  appKey: d423f2ab5c7c7750b9d524e1354fc33a5bc522e6
+  # As chaves ficam em um Secret no namespace do release do Datadog.
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
   site: us5.datadoghq.com
   dogstatsd:
     useHostPort: true
