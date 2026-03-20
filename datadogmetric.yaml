@@ -6,3 +6,4 @@ metadata:
 spec:
 ##  query: avg:container.cpu.limit{service:app-php}
   query: sum:php.request.count{service:app-php}.rollup(sum,60)
+  maxAge: 300s

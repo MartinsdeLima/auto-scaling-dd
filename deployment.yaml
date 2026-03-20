@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: app-php
-          image: martinslima/app-php:v7
+          image: martinslima/app-php:v7amr
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8089
@@ -63,4 +63,4 @@ spec:
   ports:
     - port: 80
       targetPort: 8089
-      nodePort: 30080
+      nodePort: 30081
